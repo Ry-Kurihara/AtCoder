@@ -6,7 +6,6 @@ val cntMap = wordsList.groupBy(identity).mapValues(_.size)
 
 cntMap("k")
 
-println(
-  """|3
-     |0 1 1 2
-     |""".stripMargin)
+wordsList.reverse
+
+val lo: Long = 250012613050149995L

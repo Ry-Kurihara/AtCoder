@@ -6,7 +6,9 @@ val cntMap = wordsList.groupBy(identity).mapValues(_.size)
 
 cntMap("k")
 
-println(
-  """|3
-     |0 1 1 2
-     |""".stripMargin)
+wordsList.reverse
+
+for(x <- 1 to 4; y<- 3 to 6){
+  println(s"x_is_${x}")
+  println(s"y_is_${y}")
+}
