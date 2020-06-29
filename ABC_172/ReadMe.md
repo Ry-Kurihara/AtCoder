@@ -1,6 +1,6 @@
 # ABC_170 in Scala
 
-6/14開催のAtCoderコンテストを解いた
+6/28開催のAtCoderコンテストを解いた
 
 # Construction
 
@@ -11,7 +11,9 @@
         * こちらで標準入力を指定して実行する
 
 # Features
-Matchの使い方わからん
+- <b>C問題</b>  
+緑diff：二分探索＋累積和の方法で頑張る。標準入力の速度比較もsrc/main/scala/Cディレクトリのmdファイルに記述している。
+
 
 # Requirement
 * scalaVersion     := "2.12.8"

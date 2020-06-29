@@ -4,7 +4,7 @@
 		module="abc_172-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20200628212101"
+		publication="20200629231145"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>

@@ -22,7 +22,30 @@ Scalaの水色コーダーと茶色コーダーのコードを参考に標準入
 
 詳細はソースコード参照のこと。受け取り方としては以下のような感じで、b06.txtの標準入力を一通り受け取ってから配列の長さを出力する。
 
+```scala
+val tempList: Seq[Seq[String]] = {
+  for (line <- io.Source.stdin.getLines()) yield {
+    line.split(' ').toSeq
+  }
+}.toSeq
+val N: Int = tempList(0)(0).toInt
+val M: Int = tempList(0)(1).toInt
+val K: Int = tempList(0)(2).toInt
+val ASeq: Seq[Int] = tempList(1).map(_.toInt)
+val BSeq: Seq[Int] = tempList(2).map(_.toInt)
+
+println(s"aの長さ${ASeq.size}、bの長さ${BSeq.size}")
 ```
+
+```scala
+val Array(n, m, k) = scala.io.StdIn.readLine().split(" ").map(_.toLong)
+val A = scala.io.StdIn.readLine().split(" ").map(_.toLong)
+val B = scala.io.StdIn.readLine().split(" ").map(_.toLong)
+
+println(s"aの長さ${A.size}、bの長さ${B.size}")
+```
+
+```scala
 val sc = new FastScanner(System.in)
 val n, m = sc.nextInt()
 var k = sc.nextInt()

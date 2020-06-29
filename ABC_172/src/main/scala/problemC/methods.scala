@@ -4,53 +4,39 @@ import math._
 object methods {
   def solver(): Unit = {
 
-    val tempList: Seq[Seq[String]] = {
-      for (line <- io.Source.stdin.getLines()) yield {
-        line.split(' ').toSeq
-      }
-    }.toSeq
-    val N: Int = tempList(0)(0).toInt
-    val M: Int = tempList(0)(1).toInt
-    val K: Int = tempList(0)(2).toInt
-    val ASeq: Seq[Int] = tempList(1).map(_.toInt)
-    val BSeq: Seq[Int] = tempList(2).map(_.toInt)
+    val Array(n, m, k) = scala.io.StdIn.readLine().split(" ").map(_.toLong)
+    val A: Seq[Long] = scala.io.StdIn.readLine().split(" ").map(_.toLong)
+    val B: Seq[Long] = scala.io.StdIn.readLine().split(" ").map(_.toLong)
 
-    //val reading: Int = readBook(ASeq, BSeq, K) //readNum = 0が初期値なので省略
-    //println(reading)
-    println(s"aの長さ${ASeq.size}、bの長さ${BSeq.size}")
+    //累積和の求め方ここで必要な計算量はO(N+M)
+    val cumA: Seq[Long] = A.scanLeft(0L)((x, y) => x + y)
+    val cumB: Seq[Long] = B.scanLeft(0L)((x, y) => x + y)
+
+    //Aから1冊ずつ取っていく
+
+    //println(s"aの長さ${A.size}、bの長さ${B.size}")
+    println(s"sortedAis:${A.sorted.mkString(":")}")
+    println(binarySearch(A.sorted, 22))
+
   }
 
-  def readBook(bookA: Seq[Int], bookB: Seq[Int], K: Int, readNum: Int = 0): Int = {
-    var timeLimit: Int = K
-    var whichBook: String = "A"
-    if(bookA.size == 0 && bookB.size == 0) readNum
-    else if(bookA.size == 0){
-      if(bookB.head <= timeLimit) {
-        timeLimit -= bookB.head
-        readBook(bookA, bookB.tail, timeLimit, readNum+1)
-      } else readNum
+  //ターゲットに対する2分探索：型パラメータを後々使おう
+  //このアルゴリズムの場合、ターゲットがリストにない場合、ターゲットよりも大きい値のうち最も近いものが選ばれる（証明できそう）
+  def binarySearch(A: Seq[Long], target: Long): Long = {
+    var low: Long = 0L
+    var high: Long = A.size.toLong - 1L
+    var mid: Long = {(low + high)/2L}.floor.toLong
+    var flag: Boolean = false
+    while(low <= high && !flag){ // low = highになっても終了：残りが1要素の場合
+      mid = {(low + high)/2L}.floor.toLong
+      var guess: Long = A(mid.toInt)
+      if (guess == target) flag = true
+      else if (guess > target) high = mid - 1
+      else low = mid + 1
     }
-    else if(bookB.size == 0){
-      if(bookA.head <= timeLimit) {
-        timeLimit -= bookA.head
-        readBook(bookA.tail, bookB, timeLimit, readNum+1)
-      } else readNum
-    }
-    else if (timeLimit < bookA.head && timeLimit < bookB.head) readNum
-    else {
-      val changedBook: Seq[Int] = {
-        if (bookA.head <= bookB.head) {
-          timeLimit -= bookA.head
-          whichBook = "A"
-          bookA.tail
-        } else {
-          timeLimit -= bookB.head
-          whichBook = "B"
-          bookB.tail
-        }
-      }
-      if(whichBook == "A") readBook(changedBook, bookB, timeLimit, readNum+1)
-      else readBook(bookA, changedBook, timeLimit, readNum+1)
-    } //else締め
+    // TODO:1冊ちょうど読める時と、1冊も読めない時の返り値が一緒になっている
+    if(low > high && mid.toInt > 0) A(mid.toInt - 1) //ターゲットよりも最も小さい物が選ばれるようにした
+    else A(mid.toInt)
   }
+
 }

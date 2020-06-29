@@ -10,16 +10,16 @@ object Main extends App{
 
   val str =
     """|3 4 730
-       |60 90 120
+       |60 90 120 900 98 76 77 43 88 90 33
        |80 150 80 150
        |""".stripMargin
 
   // 外部ファイルを読み込んで、その内容を渡す場合
-  //System.setIn(new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8)))
-  System.setIn(new FileInputStream("testcase/C/in/b06.txt"))
+  System.setIn(new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8)))
+  //System.setIn(new FileInputStream("testcase/C/in/b06.txt"))
 
   val start = System.currentTimeMillis
-  ln.solver
+  methods3.solver
   val processTime = System.currentTimeMillis - start
   println(s"処理時間${processTime}：ms")
 }
