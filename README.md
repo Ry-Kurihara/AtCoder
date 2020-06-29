@@ -1,6 +1,6 @@
 # AtCoder
 
-6/14開催のAtCoderコンテストを解いた
+AtCoderコンテストの記録
 
 # Construction
 Scalaで解いてるときのファイル形式

@@ -12,6 +12,8 @@
  
 # Features
 Matchの使い方わからん
+- D問題
+    - Longを使わないとテストケースの15.txtから22.txtあたりでIntの範囲を超えてしまうためWAになる
  
 # Requirement
 * scalaVersion     := "2.12.8"
