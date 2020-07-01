@@ -9,8 +9,8 @@ import problemD.{methods => methods4}
 object Main extends App{
 
   val str =
-    """|3 4 730
-       |60 90 120 900 98 76 77 43 88 90 33
+    """|3 4 240
+       |60 90 120
        |80 150 80 150
        |""".stripMargin
 
