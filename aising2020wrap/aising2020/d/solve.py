@@ -1,16 +1,7 @@
-def popcount(number, bit_counter):
-    num = number
-    counter = 0
-    while num != 0: # 5,6回程度
-        bit_con = 0
-        if counter == 0:
-            bit_con = bit_counter  
-        else:
-            bit_con = bin(num).count('1')
-        num = num % bit_con
-        counter += 1
-
-    return counter
+def popcount(n):
+    bit_count = bin(n).count('1')
+    n = n % bit_count 
+    return n
 
 if __name__ == "__main__":
     import sys 
@@ -18,24 +9,26 @@ if __name__ == "__main__":
     readline = sys.stdin.readline 
 
     N = int(input())
-    X_str= readline()
-    X = list(X_str)
-    bit_count = X_str.count('1')
+    X = readline()
+    bit_count = X.count('1')
+    mod1 = int(X, 2) % (bit_count + 1)
+    mod2 = int(X, 2) % (bit_count - 1) if (bit_count - 1) != 0 else 0
 
     for i in range(N):
-        # ビットの反転
-        x_copy = X.copy()
-        bit_count_n = bit_count
-        if x_copy[i] == '0':
-            x_copy[i] = '1'
-            bit_count_n += 1
+        if X[i] == '0':
+            X_rest = (mod1 + pow(2, N - 1 - i, bit_count + 1)) % (bit_count + 1)
         else:
-            x_copy[i] = '0'
-            bit_count_n -= 1
+            if bit_count - 1 != 0:
+                X_rest = (mod2 - pow(2, N - 1 - i, bit_count - 1)) % (bit_count - 1)
+            else:
+                print(0)
+                continue
 
-        bit_int = int("".join(x_copy), 2)
-
-        print(popcount(bit_int, bit_count_n))
+        counter = 1
+        while X_rest != 0:
+            X_rest = popcount(X_rest)
+            counter += 1
+        print(counter)
 
 
 
