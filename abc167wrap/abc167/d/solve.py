@@ -10,18 +10,27 @@ A = list(map(int, readline().split()))
 # 同じ街にいったら操作打ち切りで配列を完結させる
 
 # Teleport順の配列を作る
-teleport = [1]
+teleport = {1: True}
 next_town = 1
+roop_exist = False
 for i in range(K):
-    next_town = A[next_town - 1]
-    if next_town in teleport:
+    next_town = A[next_town - 1] # next_townがintで与えられる
+    try: # 辞書を使用してO[1]で判定する
+        teleport[next_town]
         dupulicate_town = next_town
+        # 辞書をリストに変換
+        teleport = list(teleport.keys())
         dupulicate_index = teleport.index(dupulicate_town)
         dupulicate_list = teleport[dupulicate_index:]
+        roop_exist = True
         break
-    else:
-        teleport.append(next_town)
+    except KeyError:
+        teleport[next_town] = True
 
+
+# 最後の処理の前にリストに変換してしまう
+if not roop_exist:
+    teleport = list(teleport.keys())
 
 if len(teleport) - 1 == K:
     print(teleport[-1])
